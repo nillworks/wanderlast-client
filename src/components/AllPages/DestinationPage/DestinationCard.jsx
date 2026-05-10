@@ -1,6 +1,7 @@
 // components/DestinationCard.jsx
 import { MapPin, Calendar, ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function DestinationCard({ destination }) {
   return (
@@ -42,9 +43,17 @@ export default function DestinationCard({ destination }) {
           {destination.duration}
         </div>
 
-        <button className="flex cursor-pointer items-center gap-1 text-cyan-500 font-bold text-xs uppercase tracking-widest group-hover:gap-2 transition-all">
-          Book Now <ArrowUpRight size={18} />
-        </button>
+        <div className="flex items-center justify-between">
+          <button className="flex cursor-pointer items-center gap-1 text-cyan-500 font-bold text-xs uppercase tracking-widest group-hover:gap-2 transition-all">
+            Book Now <ArrowUpRight size={18} />
+          </button>
+
+          <Link href={`/destinationDetails/${destination._id}`}>
+            <button className="flex cursor-pointer items-center gap-1 text-cyan-500 font-bold text-xs uppercase tracking-widest group-hover:gap-2 transition-all">
+              Destinations Details <ArrowUpRight size={18} />
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );
