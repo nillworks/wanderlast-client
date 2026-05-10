@@ -10,8 +10,8 @@ export default function DestinationCard({ destination }) {
         <Image
           width={400}
           height={400}
-          src={destination.image}
-          alt={destination.title}
+          src={destination.imageUrl}
+          alt={destination.description}
           className="w-full h-full object-cover"
         />
         <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded flex items-center gap-1 text-sm font-bold shadow-sm">
@@ -22,12 +22,12 @@ export default function DestinationCard({ destination }) {
       {/* Content Section */}
       <div className="p-5">
         <div className="flex items-center gap-1 text-gray-500 text-xs mb-2">
-          <MapPin size={14} className="text-gray-400" /> {destination.location}
+          <MapPin size={14} className="text-gray-400" /> {destination.country}
         </div>
 
         <div className="flex justify-between items-start mb-3">
           <h3 className="text-xl font-bold text-gray-800 leading-tight">
-            {destination.title}
+            {destination.destinationName}
           </h3>
           <div className="text-right">
             <p className="text-lg font-bold text-gray-900">
