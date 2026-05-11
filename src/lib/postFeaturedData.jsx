@@ -15,9 +15,8 @@ const postFeaturedData = async fromData => {
     revalidatePath('/destinations');
     redirect('/destinations');
   }
-  console.log(res);
 
-  return;
+  return res;
 };
 
 export default postFeaturedData;

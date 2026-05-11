@@ -13,6 +13,7 @@ import {
 import Link from 'next/link';
 import Image from 'next/image';
 import EditModalPage from '../EditModal/EditModalPage';
+import DeleteModal from '../EditModal/DeleteModal';
 
 const DestinationDetails = ({ existingData, updateFeaturedData }) => {
   const {
@@ -43,10 +44,9 @@ const DestinationDetails = ({ existingData, updateFeaturedData }) => {
               updateFeaturedData={updateFeaturedData}
             />
           </div>
-          <button className=" cursor-pointer flex items-center px-6 py-2 border border-red-200 text-red-500 rounded-md hover:bg-red-50 transition">
-            <Trash2 size={16} className="mr-2" />
-            Cancel
-          </button>
+
+          {/* Delete Destination */}
+          <DeleteModal existingData={existingData} />
         </div>
       </div>
 
