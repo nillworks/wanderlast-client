@@ -12,8 +12,9 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import EditModalPage from '../EditModal/EditModalPage';
 
-const DestinationDetails = ({ existingData }) => {
+const DestinationDetails = ({ existingData, updateFeaturedData }) => {
   const {
     name = existingData.destinationName,
     location = existingData.country,
@@ -36,10 +37,12 @@ const DestinationDetails = ({ existingData }) => {
           </button>
         </Link>
         <div className="flex gap-3">
-          <button className=" cursor-pointer flex items-center px-6 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition">
-            <Edit3 size={16} className="mr-2 text-gray-600" />
-            Edit
-          </button>
+          <div>
+            <EditModalPage
+              existingData={existingData}
+              updateFeaturedData={updateFeaturedData}
+            />
+          </div>
           <button className=" cursor-pointer flex items-center px-6 py-2 border border-red-200 text-red-500 rounded-md hover:bg-red-50 transition">
             <Trash2 size={16} className="mr-2" />
             Cancel

@@ -1,5 +1,6 @@
 import DestinationDetails from '@/components/AllPages/DestinationPage/DestinationDetails';
 import getDetailsData from '@/lib/getDetailsData';
+import updateFeaturedData from '@/lib/updateFeaturedData';
 
 const destinationDetailsPage = async ({ params }) => {
   const { id } = await params;
@@ -7,7 +8,10 @@ const destinationDetailsPage = async ({ params }) => {
 
   return (
     <div className="px-2">
-      <DestinationDetails existingData={existingData} />
+      <DestinationDetails
+        existingData={existingData}
+        updateFeaturedData={updateFeaturedData}
+      />
     </div>
   );
 };
