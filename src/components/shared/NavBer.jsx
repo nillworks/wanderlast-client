@@ -31,7 +31,7 @@ const authLinks = [
   {
     id: 1,
     name: 'Login',
-    path: '/login',
+    path: '/signin',
   },
   {
     id: 2,
