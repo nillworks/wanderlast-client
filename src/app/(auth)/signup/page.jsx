@@ -2,9 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-
 import { Eye, EyeOff } from 'lucide-react';
-
 import {
   Button,
   Description,
@@ -13,19 +11,48 @@ import {
   Input,
   Label,
   TextField,
+  toast,
 } from '@heroui/react';
-
 import Image from 'next/image';
+import { authClient, signOut } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
 
 const SignUpPage = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleFromSubmit = e => {
+  const handleFromSubmit = async e => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData);
+    const dataAll = Object.fromEntries(formData);
 
-    console.log(data);
+    // Email Password authentication
+    const { data, error } = await authClient.signUp.email({
+      name: dataAll.name,
+      email: dataAll.email,
+      password: dataAll.password,
+      image: dataAll.image,
+      callbackURL: '/signin',
+    });
+
+    if (data) {
+      signOut();
+      toast.success('Account created successfully', {
+        description: 'Your account has been created. You can now sign in.',
+        variant: 'success',
+      });
+      router.push('/signin');
+    }
+
+    if (error) {
+      toast.danger('Signup failed', {
+        description: error.message || 'Please try again later.',
+        variant: 'danger',
+      });
+      return;
+    }
+
+    e.target.reset();
   };
 
   return (

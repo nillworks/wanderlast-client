@@ -3,45 +3,24 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import ActiveLink from './ActiveLink';
+import { useSession } from '@/lib/auth-client';
+import UserMenu from '../AllPages/authUi/UserMenu';
 
 const navLinks = [
-  {
-    id: 1,
-    name: 'Home',
-    path: '/',
-  },
-  {
-    id: 2,
-    name: 'Destinations',
-    path: '/destinations',
-  },
-  {
-    id: 3,
-    name: 'My Bookings',
-    path: '/bookings',
-  },
-  {
-    id: 4,
-    name: 'Admin',
-    path: '/admin',
-  },
+  { id: 1, name: 'Home', path: '/' },
+  { id: 2, name: 'Destinations', path: '/destinations' },
+  { id: 3, name: 'My Bookings', path: '/bookings' },
 ];
 
 const authLinks = [
-  {
-    id: 1,
-    name: 'Login',
-    path: '/signin',
-  },
-  {
-    id: 2,
-    name: 'Sign Up',
-    path: '/signup',
-  },
+  { id: 1, name: 'Login', path: '/signin' },
+  { id: 2, name: 'Sign Up', path: '/signup' },
 ];
 
-const NavBer = () => {
+const NavBar = () => {
   const [open, setOpen] = useState(false);
+  const { data } = useSession();
+  const user = data?.user;
 
   return (
     <nav className="border-b bg-white sticky top-0 z-50">
@@ -61,49 +40,22 @@ const NavBer = () => {
 
           {/* Right Menu */}
           <div className="hidden md:flex items-center gap-6">
-            <ActiveLink href="/profile" name="Profile" />
-
-            {authLinks.map(link => (
-              <ActiveLink key={link.id} href={link.path} name={link.name} />
-            ))}
+            {/* Authenticated User */}
+            {user ? (
+              <UserMenu user={user} />
+            ) : (
+              <>
+                {authLinks.map(link => (
+                  <ActiveLink key={link.id} href={link.path} name={link.name} />
+                ))}
+              </>
+            )}
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button onClick={() => setOpen(!open)}>
-              {open ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className="w-7 h-7"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className="w-7 h-7"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  />
-                </svg>
-              )}
-            </button>
-          </div>
+          {/* Mobile Button */}
+          <button onClick={() => setOpen(!open)} className="md:hidden">
+            {open ? '✕' : '☰'}
+          </button>
         </div>
 
         {/* Mobile Menu */}
@@ -117,11 +69,14 @@ const NavBer = () => {
               <ActiveLink key={link.id} href={link.path} name={link.name} />
             ))}
 
-            <ActiveLink href="/profile" name="Profile" />
-
-            {authLinks.map(link => (
-              <ActiveLink key={link.id} href={link.path} name={link.name} />
-            ))}
+            {/* Auth section */}
+            {user ? (
+              <UserMenu user={user} />
+            ) : (
+              authLinks.map(link => (
+                <ActiveLink key={link.id} href={link.path} name={link.name} />
+              ))
+            )}
           </div>
         </div>
       </div>
@@ -129,4 +84,4 @@ const NavBer = () => {
   );
 };
 
-export default NavBer;
+export default NavBar;

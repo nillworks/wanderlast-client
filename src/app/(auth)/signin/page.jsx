@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-
 import { Eye, EyeOff } from 'lucide-react';
 
 import {
@@ -12,17 +11,45 @@ import {
   Label,
   TextField,
   FieldError,
+  toast,
 } from '@heroui/react';
 import Image from 'next/image';
+import { authClient } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
 
 const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData);
+    const dataAll = Object.fromEntries(formData);
+
+    const { data, error } = await authClient.signIn.email({
+      email: dataAll.email,
+      password: dataAll.password,
+      rememberMe: true,
+      callbackURL: '/',
+    });
+
+    if (data) {
+      toast.success('Welcome back', {
+        description: 'You have successfully signed in to your account.',
+        variant: 'success',
+      });
+
+      router.push('/');
+    }
+
+    if (error) {
+      toast.danger('Login failed', {
+        description: error.message || 'Invalid email or password.',
+        variant: 'danger',
+      });
+      return;
+    }
 
     console.log(data);
   };
