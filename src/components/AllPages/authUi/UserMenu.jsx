@@ -39,7 +39,7 @@ const UserMenu = ({ user }) => {
           {/* Profile */}
           <button
             onClick={() => {
-              router.push('/profile');
+              router.push('/user-profile');
               setOpen(false);
             }}
             className="w-full cursor-pointer text-left px-4 py-2 hover:bg-gray-100 transition"

@@ -55,6 +55,14 @@ const SignUpPage = () => {
     e.target.reset();
   };
 
+  // google signUp
+  const handleGoogleSignIn = async () => {
+    const { data, error } = await authClient.signIn.social({
+      provider: 'google',
+    });
+    console.log(data);
+  };
+
   return (
     <div className="min-h-screen bg-[#f4f4f4] flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white p-8 shadow-md border border-gray-200">
@@ -150,7 +158,11 @@ const SignUpPage = () => {
         </div>
 
         {/* Google Login */}
-        <Button variant="bordered" className="w-full border border-[#ddd] h-11">
+        <Button
+          onClick={handleGoogleSignIn}
+          variant="bordered"
+          className="w-full border border-[#ddd] h-11"
+        >
           <Image
             src="https://www.svgrepo.com/show/475656/google-color.svg"
             alt="google"

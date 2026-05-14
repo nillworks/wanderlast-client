@@ -54,6 +54,14 @@ const SignInPage = () => {
     console.log(data);
   };
 
+  // google signin
+  const handleGoogleSignIn = async () => {
+    const { data, error } = await authClient.signIn.social({
+      provider: 'google',
+    });
+    console.log(data);
+  };
+
   return (
     <div className="min-h-screen bg-[#f4f4f4] flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white p-8 shadow-md border border-gray-200">
@@ -127,7 +135,11 @@ const SignInPage = () => {
         </div>
 
         {/* Google */}
-        <Button variant="bordered" className="w-full h-11 border border-[#ddd]">
+        <Button
+          onClick={handleGoogleSignIn}
+          variant="bordered"
+          className="w-full h-11 border border-[#ddd]"
+        >
           <Image
             width={20}
             height={20}

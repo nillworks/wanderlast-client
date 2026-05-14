@@ -14,6 +14,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import EditModalPage from '../EditModal/EditModalPage';
 import DeleteModal from '../EditModal/DeleteModal';
+import BookingCard from './BookingCard';
 
 const DestinationDetails = ({ existingData, updateFeaturedData }) => {
   const {
@@ -116,45 +117,7 @@ const DestinationDetails = ({ existingData, updateFeaturedData }) => {
         </div>
 
         {/* Right Column: Booking Card */}
-        <div className="lg:col-span-1">
-          <div className="border border-gray-100 rounded-2xl p-6 shadow-xl shadow-gray-100/50 sticky top-6">
-            <p className="text-gray-500 text-sm mb-1">Starting from</p>
-            <div className="flex items-baseline gap-1 mb-6">
-              <span className="text-3xl font-bold text-cyan-500">${price}</span>
-              <span className="text-gray-400 text-sm font-normal">
-                per person
-              </span>
-            </div>
-
-            <div className="mb-6">
-              <input
-                type="text"
-                defaultValue="05/15/2026"
-                className="w-full p-3 bg-gray-50 border border-gray-100 rounded-lg text-gray-600 focus:outline-none"
-              />
-            </div>
-
-            <button className="w-full bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-3.5 rounded-lg flex items-center justify-center gap-2 transition-all mb-6">
-              Book Now <ArrowRight size={18} />
-            </button>
-
-            <div className="space-y-3 border-t pt-6">
-              {[
-                'Free cancellation up to 7 days',
-                'Travel insurance included',
-                '24/7 customer support',
-              ].map((text, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-center gap-2 text-sm text-gray-500"
-                >
-                  <Check size={16} className="text-green-500" />
-                  {text}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        <BookingCard destinationInfo={existingData} />
       </div>
     </div>
   );
