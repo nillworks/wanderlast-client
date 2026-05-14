@@ -9,7 +9,7 @@ import UserMenu from '../AllPages/authUi/UserMenu';
 const navLinks = [
   { id: 1, name: 'Home', path: '/' },
   { id: 2, name: 'Destinations', path: '/destinations' },
-  { id: 3, name: 'My Bookings', path: '/bookings' },
+  { id: 3, name: 'My Bookings', path: '/my-booking' },
 ];
 
 const authLinks = [
