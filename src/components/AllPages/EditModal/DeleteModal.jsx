@@ -9,9 +9,12 @@ const DeleteModal = ({ existingData }) => {
   const router = useRouter();
 
   const handleDelete = async _id => {
-    const req = await fetch(`http://localhost:8000/featured/${_id}`, {
-      method: 'DELETE',
-    });
+    const req = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/featured/${_id}`,
+      {
+        method: 'DELETE',
+      },
+    );
 
     const res = await req.json();
 

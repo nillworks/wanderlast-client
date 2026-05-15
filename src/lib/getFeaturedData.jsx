@@ -1,5 +1,5 @@
 const getFeaturedData = async () => {
-  const res = await fetch('http://localhost:8000/featured');
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/featured`);
   return res.json();
 };
 

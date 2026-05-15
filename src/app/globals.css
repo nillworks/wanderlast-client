@@ -1,2 +1,8 @@
 @import 'tailwindcss';
 @import '@heroui/styles';
+
+@layer utilities {
+  .backgroundImage {
+    background-image: url('/assets/Banner.png');
+  }
+}

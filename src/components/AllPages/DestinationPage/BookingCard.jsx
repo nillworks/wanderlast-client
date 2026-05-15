@@ -1,5 +1,5 @@
 'use client';
-import { useSession } from '@/lib/auth-client';
+import { authClient, useSession } from '@/lib/auth-client';
 import { DateField, Label, toast } from '@heroui/react';
 
 import { ArrowRight, Check } from 'lucide-react';
@@ -47,9 +47,14 @@ const BookingCard = ({ destinationInfo }) => {
       imageUrl,
     };
 
-    const req = await fetch('http://localhost:8000/booking', {
+    const { data: tokenData } = await authClient.token();
+
+    const req = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking`, {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${tokenData?.token}`,
+      },
       body: JSON.stringify(bookingData),
     });
 

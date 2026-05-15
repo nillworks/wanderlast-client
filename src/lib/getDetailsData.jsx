@@ -1,7 +1,18 @@
+import { headers } from 'next/headers';
+import { auth } from './auth';
+
 const getDetailsData = async singleId => {
-  const res = await fetch(`http://localhost:8000/featured/${singleId}`, {
-    headers: { authorization: 'logged in' },
+  const { token } = await auth.api.getToken({
+    headers: await headers(),
   });
+  console.log(token);
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/featured/${singleId}`,
+    {
+      headers: { authorization: `Bearer ${token}` },
+    },
+  );
   return res.json();
 };
 

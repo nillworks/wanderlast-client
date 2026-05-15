@@ -23,9 +23,12 @@ const MyBookingCard = ({ booking }) => {
 
   // Handle Cancel Booking
   const handleBooing = async () => {
-    const req = await fetch(`http://localhost:8000/booking/${_id}`, {
-      method: 'DELETE',
-    });
+    const req = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/booking/${_id}`,
+      {
+        method: 'DELETE',
+      },
+    );
 
     const res = await req.json();
     if (res.deletedCount > 0) {
